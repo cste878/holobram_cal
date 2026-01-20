@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hologram Ray Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Hologram Ray Visualizer</h1>
+        </header>
+
+        <main>
+            <div class="controls-panel">
+                <h2>Parameters</h2>
+
+                <div class="control-group group-hologram">
+                    <h3>Hologram Properties</h3>
+                    <label>
+                        Resolution X (px)
+                        <input type="number" id="resX" value="1024">
+                    </label>
+                    <label>
+                        Resolution Y (px)
+                        <input type="number" id="resY" value="1024">
+                    </label>
+                    <label>
+                        Pixel Pitch (μm)
+                        <input type="number" id="pitch" value="4.0" step="0.1">
+                    </label>
+                </div>
+
+                <div class="control-group group-light">
+                    <h3>Light Source</h3>
+                    <label>
+                        Wavelength (nm)
+                        <input type="number" id="wavelength" value="633">
+                    </label>
+                    <label>
+                        Parallel Light Angle
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <input type="number" id="lightAngle" value="0.2" step="0.1" style="width: 60px;">
+                            <select id="angleUnit"
+                                style="padding: 5px; border-radius: 4px; background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color);">
+                                <option value="deg">deg</option>
+                                <option value="rad" selected>rad</option>
+                            </select>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="control-group group-object-center">
+                    <h3>Object Center</h3>
+                    <label>X (mm) <input type="number" id="objX" value="0" step="0.1"></label>
+                    <label>Y (mm) <input type="number" id="objY" value="0" step="0.1"></label>
+                    <label>Z (mm) <input type="number" id="objZ" value="0" step="0.1"></label>
+                </div>
+
+                <div class="control-group group-object-extents">
+                    <h3>Object Max Extents</h3>
+                    <label>Max X (mm) <input type="number" id="objMaxX" value="1" step="0.1"></label>
+                    <label>Max Y (mm) <input type="number" id="objMaxY" value="1" step="0.1"></label>
+                    <label>Max Z (mm) <input type="number" id="objMaxZ" value="1" step="0.1"></label>
+                </div>
+
+                <div class="control-group group-viewpoint">
+                    <h3 style="color: #607d8b;">Viewpoint Analysis</h3>
+                    <label>Viewpoint Z (mm) <input type="number" id="viewZ" value="500" step="10"></label>
+
+                    <div style="margin-top: 10px; font-size: 0.9rem;">
+                        <strong>Safe Distances (from axis):</strong>
+                        <div style="margin-top: 5px; padding: 8px; background: var(--bg-color); border-radius: 4px;">
+                            <div style="margin-bottom: 4px;">YZ (+Y): <span id="safeYZ_Pos">--</span> mm</div>
+                            <div style="margin-bottom: 4px;">YZ (-Y): <span id="safeYZ_Neg">--</span> mm</div>
+                            <div style="border-top: 1px solid #ccc; margin: 4px 0;"></div>
+                            <div style="margin-bottom: 4px;">XZ (+X): <span id="safeXZ_Pos">--</span> mm</div>
+                            <div>XZ (-X): <span id="safeXZ_Neg">--</span> mm</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="updateBtn">Update Visualization</button>
+            </div>
+
+            <div class="visualization-panel">
+                <div class="canvas-container">
+                    <h3>YZ Plane (Side View)</h3>
+                    <canvas id="canvasYZ"></canvas>
+                </div>
+                <div class="canvas-container">
+                    <h3>XZ Plane (Top View)</h3>
+                    <canvas id="canvasXZ"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
